@@ -1,8 +1,11 @@
 extends Sprite
 
-var _data: Object
+var _data: Dictionary
 var _resource_count: int
 var _rotation_speed: float
+
+func get_type() -> String:
+  return _data.type
 
 func initialize(type: String, size: float) -> void:
   _data = CastleDB.get_asteroid(type)

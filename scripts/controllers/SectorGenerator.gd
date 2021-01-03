@@ -20,7 +20,7 @@ func generate_sector() -> void:
     _new_asteroid.initialize(_asteroid_types[randi() % _asteroid_types.size()], rand_range(ASTEROID_MIN_SIZE, 1))
     _asteroids_root.add_child(_new_asteroid)
 
-    _new_asteroid.position = Vector2(rand_range(100, 924), rand_range(100, 500))
+    _new_asteroid.position = Vector2(rand_range(-400, 400), rand_range(-200, 200))
 
 func _ready():
   call_deferred("generate_sector")

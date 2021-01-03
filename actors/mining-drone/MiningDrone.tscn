@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://actors/mining-drone/mining_drone.gd" type="Script" id=1]
+[ext_resource path="res://actors/mining-drone/mining_drone.png" type="Texture" id=2]
+
+[node name="MiningDrone" type="Sprite" groups=[
+"drones",
+]]
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

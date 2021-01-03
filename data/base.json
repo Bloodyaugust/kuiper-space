@@ -80,6 +80,41 @@
 			],
 			"separators": [],
 			"props": {}
+		},
+		{
+			"name": "drones",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "type",
+					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "speed",
+					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "health",
+					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "workSpeed",
+					"display": null
+				}
+			],
+			"lines": [
+				{
+					"type": "mining",
+					"speed": 900,
+					"health": 5,
+					"workSpeed": 5
+				}
+			],
+			"separators": [],
+			"props": {}
 		}
 	],
 	"customTypes": [],

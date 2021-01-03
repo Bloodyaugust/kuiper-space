@@ -2,14 +2,23 @@ extends Node
 
 var db: Object
 
-func get_asteroid(type: String) -> Object:
+func get_asteroid(type: String) -> Dictionary:
   var asteroids: Array = get_entries("asteroids")
 
   for asteroid in asteroids:
     if asteroid.type == type:
       return asteroid
 
-  return Object()
+  return {}
+
+func get_drone(type: String) -> Dictionary:
+  var drones: Array = get_entries("drones")
+
+  for drone in drones:
+    if drone.type == type:
+      return drone
+
+  return {}
 
 func get_entries(sheet_name: String) -> Array:
   for sheet in db.sheets:
