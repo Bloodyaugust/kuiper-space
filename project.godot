@@ -43,6 +43,10 @@ GDUtil="*res://lib/util/GDUtil.gd"
 
 window/stretch/mode="2d"
 
+[editor_plugins]
+
+enabled=PoolStringArray( "carmel4a97.RTS_Camera2D" )
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

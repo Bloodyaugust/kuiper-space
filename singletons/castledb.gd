@@ -2,6 +2,15 @@ extends Node
 
 var db: Object
 
+func get_asteroid(type: String) -> Object:
+  var asteroids: Array = get_entries("asteroids")
+
+  for asteroid in asteroids:
+    if asteroid.type == type:
+      return asteroid
+
+  return Object()
+
 func get_entries(sheet_name: String) -> Array:
   for sheet in db.sheets:
     if sheet_name == sheet.name:
