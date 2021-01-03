@@ -1,0 +1,79 @@
+{
+	"sheets": [
+		{
+			"name": "asteroids",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "type",
+					"display": null
+				},
+				{
+					"typeStr": "1",
+					"name": "resource",
+					"display": null
+				},
+				{
+					"typeStr": "16",
+					"name": "resourceRange"
+				},
+				{
+					"typeStr": "11",
+					"name": "color",
+					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "frequency",
+					"display": null
+				}
+			],
+			"lines": [
+				{
+					"type": "metallic",
+					"resource": "metals",
+					"resourceRange": [
+						5,
+						20
+					],
+					"color": 13522696,
+					"frequency": 3
+				},
+				{
+					"type": "ice",
+					"resource": "water",
+					"color": 8634102,
+					"resourceRange": [
+						10,
+						100
+					],
+					"frequency": 5
+				},
+				{
+					"type": "carbonaceous",
+					"resource": "carbon",
+					"color": 6380122,
+					"resourceRange": [
+						15,
+						25
+					],
+					"frequency": 15
+				},
+				{
+					"type": "silicate",
+					"resource": "silicates",
+					"color": 13417917,
+					"resourceRange": [
+						30,
+						50
+					],
+					"frequency": 10
+				}
+			],
+			"separators": [],
+			"props": {}
+		}
+	],
+	"customTypes": [],
+	"compress": false
+}
