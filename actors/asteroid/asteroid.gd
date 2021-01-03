@@ -11,8 +11,9 @@ func initialize(type: String, size: float) -> void:
   _data = CastleDB.get_asteroid(type)
 
   modulate = Color(_data.colorHex)
-  scale = Vector2(size, size)
   _resource_count = lerp(_data.resourceRange[0], _data.resourceRange[1], size)
+  var _new_scale: float = _resource_count / _data.resourceRange[1]
+  scale = Vector2(_new_scale, _new_scale)
 
 func mine() -> Dictionary:
   _resource_count -= 1
