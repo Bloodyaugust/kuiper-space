@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://actors/mothership/mothership.png" type="Texture" id=1]
 [ext_resource path="res://actors/mining-drone/MiningDrone.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/combat-drone/CombatDrone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/asteroid/Asteroid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/controllers/SectorGenerator.gd" type="Script" id=5]
 [ext_resource path="res://resources/themes/kenney/kenney.tres" type="Theme" id=6]
@@ -54,63 +53,61 @@ position = Vector2( 36.0103, 131.265 )
 asteroid_type_target = "metallic"
 
 [node name="MiningDrone2" parent="." instance=ExtResource( 2 )]
-position = Vector2( 53, 106.724 )
+position = Vector2( 76.5969, 128.433 )
 asteroid_type_target = "metallic"
 
 [node name="MiningDrone3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 16.1889, 99.1731 )
+position = Vector2( 40.7297, 104.836 )
 asteroid_type_target = "metallic"
 
 [node name="MiningDrone4" parent="." instance=ExtResource( 2 )]
-position = Vector2( 82.2602, 118.995 )
+position = Vector2( 73.7653, 102.949 )
 asteroid_type_target = "metallic"
 
 [node name="MiningDrone5" parent="." instance=ExtResource( 2 )]
-position = Vector2( -183.912, 118.995 )
+position = Vector2( 186.086, 147.311 )
 asteroid_type_target = "ice"
 
 [node name="MiningDrone6" parent="." instance=ExtResource( 2 )]
-position = Vector2( -217.892, 151.086 )
+position = Vector2( 191.75, 170.908 )
 asteroid_type_target = "ice"
 
 [node name="MiningDrone7" parent="." instance=ExtResource( 2 )]
-position = Vector2( -221.667, 125.602 )
+position = Vector2( 227.617, 146.367 )
 asteroid_type_target = "ice"
 
 [node name="MiningDrone8" parent="." instance=ExtResource( 2 )]
-position = Vector2( -178.249, 144.479 )
+position = Vector2( 223.841, 176.571 )
 asteroid_type_target = "ice"
 
 [node name="MiningDrone9" parent="." instance=ExtResource( 2 )]
-position = Vector2( 203.076, 130.321 )
+position = Vector2( -202.79, 153.918 )
 asteroid_type_target = "carbonaceous"
 
 [node name="MiningDrone10" parent="." instance=ExtResource( 2 )]
-position = Vector2( 200.244, 98.2293 )
+position = Vector2( -166.923, 133.153 )
 asteroid_type_target = "carbonaceous"
 
 [node name="MiningDrone11" parent="." instance=ExtResource( 2 )]
-position = Vector2( 238.943, 106.724 )
+position = Vector2( -174.474, 184.122 )
 asteroid_type_target = "carbonaceous"
 
 [node name="MiningDrone12" parent="." instance=ExtResource( 2 )]
-position = Vector2( 244.607, 136.928 )
+position = Vector2( -212.229, 124.658 )
 asteroid_type_target = "carbonaceous"
 
 [node name="MiningDrone13" parent="." instance=ExtResource( 2 )]
-position = Vector2( 219.122, 214.326 )
+position = Vector2( -87.6373, 82.1834 )
 asteroid_type_target = "silicate"
 
 [node name="MiningDrone14" parent="." instance=ExtResource( 2 )]
-position = Vector2( 257.821, 199.224 )
+position = Vector2( -54.6017, 76.5202 )
 asteroid_type_target = "silicate"
 
 [node name="MiningDrone15" parent="." instance=ExtResource( 2 )]
-position = Vector2( 227.617, 245.474 )
+position = Vector2( -64.9843, 101.061 )
 asteroid_type_target = "silicate"
 
 [node name="MiningDrone16" parent="." instance=ExtResource( 2 )]
-position = Vector2( 266.316, 234.147 )
+position = Vector2( -31.0048, 105.78 )
 asteroid_type_target = "silicate"
-
-[node name="CombatDrone" parent="." instance=ExtResource( 3 )]

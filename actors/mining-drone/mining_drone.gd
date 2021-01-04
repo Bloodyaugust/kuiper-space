@@ -10,6 +10,7 @@ enum MINING_DRONE_STATES {
 export var asteroid_type_target: String
 export var health_scene: PackedScene
 
+onready var _boid = $"./Boid"
 onready var _data: Dictionary = CastleDB.get_drone("mining")
 onready var _tree = get_tree()
 
@@ -44,21 +45,19 @@ func _process(delta):
           _state = MINING_DRONE_STATES.MOVING
           _returning_cargo = false
 
-          look_at(_target.position)
+          _boid.set_target(_target.global_position)
           break
 
       if _target == null:
         _target = _tree.get_nodes_in_group("mothership")[0]
         _state = MINING_DRONE_STATES.MOVING
         _returning_cargo = true
-        look_at(_target.position)
+        _boid.set_target(_target.global_position)
 
     MINING_DRONE_STATES.MOVING:
       if _target == null || _target.is_queued_for_deletion():
         _on_asteroid_mined_out()
         continue
-
-      translate((_target.position - position).normalized() * _data.speed * delta)
 
       if position.distance_squared_to(_target.position) <= 150:
         if _returning_cargo:
@@ -83,7 +82,7 @@ func _process(delta):
           _target = _tree.get_nodes_in_group("mothership")[0]
           _returning_cargo = true
 
-          look_at(_target.position)
+          _boid.set_target(_target.global_position)
 
     MINING_DRONE_STATES.UNLOADING:
       _job_completion += _data.workSpeed * delta

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://actors/mining-drone/mining_drone.gd" type="Script" id=1]
 [ext_resource path="res://actors/mining-drone/mining_drone.png" type="Texture" id=2]
 [ext_resource path="res://behaviors/health/Health.tscn" type="PackedScene" id=3]
+[ext_resource path="res://behaviors/boid/Boid.tscn" type="PackedScene" id=4]
 
 [node name="MiningDrone" type="Sprite" groups=[
 "drones",
@@ -11,3 +12,5 @@
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 health_scene = ExtResource( 3 )
+
+[node name="Boid" parent="." instance=ExtResource( 4 )]
