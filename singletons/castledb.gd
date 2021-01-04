@@ -27,6 +27,15 @@ func get_entries(sheet_name: String) -> Array:
 
   return []
 
+func get_weapon(type: String) -> Dictionary:
+  var weapons: Array = get_entries("weapons")
+
+  for weapon in weapons:
+    if weapon.type == type:
+      return weapon
+
+  return {}
+
 func _load_db() -> Object:
   var file = File.new()
   file.open("res://data/base.json", File.READ)

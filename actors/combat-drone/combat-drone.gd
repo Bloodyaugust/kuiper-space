@@ -7,6 +7,7 @@ enum COMBAT_DRONE_STATES {
 }
 
 export var health_scene: PackedScene
+export var weapon_scene: PackedScene
 
 onready var _data: Dictionary = CastleDB.get_drone("laser")
 onready var _tree := get_tree()
@@ -31,7 +32,7 @@ func _process(delta):
       var _possible_targets = _tree.get_nodes_in_group("player")
 
       for _possible_target in _possible_targets:
-        if _possible_target.get_node("health").health > 0:
+        if _possible_target.get_node("health").health > 0 && !_possible_target.is_queued_for_deletion():
           _set_target(_possible_target)
 
     COMBAT_DRONE_STATES.MOVING:
@@ -46,7 +47,6 @@ func _process(delta):
         _state = COMBAT_DRONE_STATES.MOVING
 
 func _ready():
-  # TODO: Instantiate weapons
   var _new_health_behavior = health_scene.instance()
 
   _new_health_behavior.name = "health"
@@ -55,7 +55,18 @@ func _ready():
 
   add_child(_new_health_behavior)
 
+  for _weapon in _data.weapons:
+    var _weapon_data = CastleDB.get_weapon(_weapon.weapon)
+    var _new_weapon = weapon_scene.instance()
+
+    _new_weapon.initialize(_weapon_data)
+
+    add_child(_new_weapon)
+
 func _set_target(target: Node2D):
+  if _target != null:
+    _target.get_node("health").disconnect("died", self, "_on_target_died")
+
   _target = target
   _target.get_node("health").connect("died", self, "_on_target_died")
   _state = COMBAT_DRONE_STATES.MOVING

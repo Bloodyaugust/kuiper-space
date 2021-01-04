@@ -149,13 +149,32 @@
 					"display": null
 				},
 				{
+					"typeStr": "2",
+					"name": "beam",
+					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "damage",
+					"display": null
+				},
+				{
 					"typeStr": "4",
 					"name": "reload",
 					"display": null
 				},
 				{
 					"typeStr": "4",
-					"name": "cooldown",
+					"name": "cooling"
+				},
+				{
+					"typeStr": "4",
+					"name": "heat",
+					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "heatCapacity",
 					"display": null
 				},
 				{
@@ -172,10 +191,14 @@
 			"lines": [
 				{
 					"type": "laser",
-					"reload": 0.75,
-					"cooldown": 0.5,
-					"clip": 2,
-					"range": 50
+					"reload": 0.15,
+					"clip": 1,
+					"range": 2000,
+					"cooling": 0.95,
+					"heatCapacity": 0.5,
+					"beam": true,
+					"heat": 1.5,
+					"damage": 3
 				}
 			],
 			"separators": [],
