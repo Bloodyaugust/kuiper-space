@@ -14,3 +14,8 @@ script = ExtResource( 1 )
 health_scene = ExtResource( 3 )
 
 [node name="Boid" parent="." instance=ExtResource( 4 )]
+
+[node name="Beam" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 2.0
+default_color = Color( 0.486275, 0.0823529, 0.541176, 1 )

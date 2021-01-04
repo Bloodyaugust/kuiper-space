@@ -10,6 +10,7 @@ enum MINING_DRONE_STATES {
 export var asteroid_type_target: String
 export var health_scene: PackedScene
 
+onready var _beam: Line2D = $"./Beam"
 onready var _boid = $"./Boid"
 onready var _data: Dictionary = CastleDB.get_drone("mining")
 onready var _tree = get_tree()
@@ -25,10 +26,17 @@ var _returning_cargo: bool
 var _state: int = MINING_DRONE_STATES.IDLE
 var _target: Node2D
 
+func _draw():
+  pass
+  # draw_arc(Vector2(), sqrt(_data.range), 0, PI * 2, 12, Color.red)
+  # draw_arc(Vector2(), sqrt(500), 0, PI * 2, 12, Color.blue)
+  # draw_arc(Vector2(), sqrt(10000), 0, PI * 2, 12, Color.green)
+
 func _on_asteroid_mined_out():
   _target = null
   _state = MINING_DRONE_STATES.IDLE
   _job_completion = 0
+  _beam.set_point_position(1, Vector2())
 
 func _on_died():
   queue_free()
@@ -59,7 +67,7 @@ func _process(delta):
         _on_asteroid_mined_out()
         continue
 
-      if position.distance_squared_to(_target.position) <= 150:
+      if position.distance_squared_to(_target.position) <= _data.range:
         if _returning_cargo:
           _state = MINING_DRONE_STATES.UNLOADING
         else:
@@ -71,6 +79,8 @@ func _process(delta):
         continue
       else:
         _job_completion += _data.workSpeed * delta
+        _beam.look_at(_target.global_position)
+        _beam.set_point_position(1, Vector2.RIGHT * global_position.distance_to(_target.global_position))
 
         if _job_completion >= 1:
           var _resource_object = _target.mine()
@@ -81,6 +91,7 @@ func _process(delta):
           # TODO: Cache this
           _target = _tree.get_nodes_in_group("mothership")[0]
           _returning_cargo = true
+          _beam.set_point_position(1, Vector2())
 
           _boid.set_target(_target.global_position)
 
@@ -92,6 +103,8 @@ func _process(delta):
         _job_completion = 0
         _returning_cargo = false
         _state = MINING_DRONE_STATES.IDLE
+
+  update()
 
 func _ready():
   var _new_health_behavior = health_scene.instance()

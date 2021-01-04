@@ -121,7 +121,7 @@
 					"speed": 150,
 					"health": 5,
 					"workSpeed": 0.5,
-					"range": 15,
+					"range": 5000,
 					"weapons": []
 				},
 				{
