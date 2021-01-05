@@ -12,14 +12,12 @@ func initialize(type: String, size: float) -> void:
 
   modulate = Color(_data.colorHex)
   _resource_count = lerp(_data.resourceRange[0], _data.resourceRange[1], size)
-  var _new_scale: float = _resource_count / _data.resourceRange[1]
-  scale = Vector2(_new_scale, _new_scale)
+  _scale_asteroid()
 
 func mine() -> Dictionary:
   _resource_count -= 1
 
-  var _new_scale: float = _resource_count / _data.resourceRange[1]
-  scale = Vector2(_new_scale, _new_scale)
+  _scale_asteroid()
 
   if _resource_count <= 0:
     queue_free()
@@ -34,3 +32,7 @@ func _process(delta):
 
 func _ready():
   _rotation_speed = rand_range(-0.25, 0.25)
+
+func _scale_asteroid() -> void:
+  var _new_scale: float = 0.25 + (_resource_count / _data.resourceRange[1]) * 0.75
+  scale = Vector2(_new_scale, _new_scale)
