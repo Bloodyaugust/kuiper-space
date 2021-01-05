@@ -9,6 +9,7 @@ enum MINING_DRONE_STATES {
 
 export var asteroid_type_target: String
 export var health_scene: PackedScene
+export var team: int
 
 onready var _beam: Line2D = $"./Beam"
 onready var _boid = $"./Boid"

@@ -1,15 +1,20 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://actors/combat-drone/combat-drone.gd" type="Script" id=1]
 [ext_resource path="res://actors/combat-drone/laser_drone.png" type="Texture" id=2]
 [ext_resource path="res://behaviors/health/Health.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/weapons/Weapon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://behaviors/boid/Boid.tscn" type="PackedScene" id=5]
 
 [node name="CombatDrone" type="Sprite" groups=[
+"drones",
 "enemies",
 ]]
-position = Vector2( 109.89, 91.5078 )
 texture = ExtResource( 2 )
 script = ExtResource( 1 )
 health_scene = ExtResource( 3 )
+team = 1
 weapon_scene = ExtResource( 4 )
+
+[node name="Boid" parent="." instance=ExtResource( 5 )]
+chase_enemies = true

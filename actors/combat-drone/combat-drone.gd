@@ -7,8 +7,10 @@ enum COMBAT_DRONE_STATES {
 }
 
 export var health_scene: PackedScene
+export var team: int
 export var weapon_scene: PackedScene
 
+onready var _boid = $"./Boid"
 onready var _data: Dictionary = CastleDB.get_drone("laser")
 onready var _tree := get_tree()
 
@@ -36,8 +38,7 @@ func _process(delta):
           _set_target(_possible_target)
 
     COMBAT_DRONE_STATES.MOVING:
-      look_at(_target.position)
-      translate((_target.position - position).normalized() * delta * _data.speed)
+      _boid.set_target(_target.global_position)
       
       if position.distance_squared_to(_target.position) <= _data.range:
         _state = COMBAT_DRONE_STATES.ATTACKING

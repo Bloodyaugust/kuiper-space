@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://actors/mothership/mothership.png" type="Texture" id=1]
 [ext_resource path="res://actors/mining-drone/MiningDrone.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/combat-drone/CombatDrone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/asteroid/Asteroid.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/controllers/SectorGenerator.gd" type="Script" id=5]
 [ext_resource path="res://resources/themes/kenney/kenney.tres" type="Theme" id=6]
@@ -47,6 +48,9 @@ script = ExtResource( 7 )
 [node name="RTS-Camera2D" type="Camera2D" parent="."]
 current = true
 script = ExtResource( 8 )
+zoom_out_limit = 5
+zoom_speed = 0.05
+zoom_min = 1.0
 
 [node name="MiningDrone" parent="." instance=ExtResource( 2 )]
 position = Vector2( 36.0103, 131.265 )
@@ -111,3 +115,15 @@ asteroid_type_target = "silicate"
 [node name="MiningDrone16" parent="." instance=ExtResource( 2 )]
 position = Vector2( -31.0048, 105.78 )
 asteroid_type_target = "silicate"
+
+[node name="CombatDrone" parent="." instance=ExtResource( 3 )]
+position = Vector2( -445.347, -235.118 )
+
+[node name="CombatDrone2" parent="." instance=ExtResource( 3 )]
+position = Vector2( -473.663, -221.903 )
+
+[node name="CombatDrone3" parent="." instance=ExtResource( 3 )]
+position = Vector2( -471.775, -256.827 )
+
+[node name="CombatDrone4" parent="." instance=ExtResource( 3 )]
+position = Vector2( -444.403, -267.209 )

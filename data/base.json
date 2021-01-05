@@ -126,7 +126,7 @@
 				},
 				{
 					"type": "laser",
-					"speed": 100,
+					"speed": 200,
 					"health": 5,
 					"workSpeed": 0,
 					"range": 1500,
