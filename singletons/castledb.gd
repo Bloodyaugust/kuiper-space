@@ -27,6 +27,15 @@ func get_entries(sheet_name: String) -> Array:
 
   return []
 
+func get_platform(type: String) -> Dictionary:
+  var platforms: Array = get_entries("platforms")
+
+  for platform in platforms:
+    if platform.type == type:
+      return platform
+
+  return {}
+
 func get_weapon(type: String) -> Dictionary:
   var weapons: Array = get_entries("weapons")
 

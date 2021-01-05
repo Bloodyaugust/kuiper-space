@@ -9,3 +9,6 @@ func damage(amount: float) -> void:
 
   if health <= 0:
     emit_signal("died")
+
+func _ready():
+  get_parent().add_to_group("attackable")

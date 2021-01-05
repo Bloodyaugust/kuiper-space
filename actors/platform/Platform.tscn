@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://actors/platform/platform.gd" type="Script" id=1]
+[ext_resource path="res://actors/platform/laser_defense/base.png" type="Texture" id=2]
+[ext_resource path="res://behaviors/health/Health.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/weapons/Weapon.tscn" type="PackedScene" id=4]
+
+[node name="Platform" type="Sprite" groups=[
+"platforms",
+"player",
+]]
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+health_scene = ExtResource( 3 )
+weapon_scene = ExtResource( 4 )

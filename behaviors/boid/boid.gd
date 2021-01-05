@@ -2,11 +2,13 @@ extends Node
 
 const BOID_ENEMY_CHASE_SCALAR = 3
 const BOID_ENEMY_REPEL_SCALAR = 5
+const BOID_PLATFORM_REPEL_SCALAR = 10
 const BOID_FRIENDLY_REPEL_SCALAR = 0.25
 const BOID_MAX_CHASE_DISTANCE = 15000
 const BOID_MAX_COHESION_DISTANCE = 10000
 const BOID_MAX_ENEMY_REPEL_DISTANCE = 8000
 const BOID_MAX_FRIENDLY_REPEL_DISTANCE = 500
+const BOID_MAX_PLATFORM_REPEL_DISTANCE = 4000
 
 export var chase_enemies: bool
 
@@ -21,29 +23,36 @@ func set_target(new_target: Vector2) -> void:
 
 func _process(delta):
   var _drones = _tree.get_nodes_in_group("drones")
+  var _platforms = _tree.get_nodes_in_group("platforms")
   var _flock_chase_vector = Vector2()
   var _flock_rotation_vector = Vector2()
   var _flock_enemy_repel_vector = Vector2()
   var _flock_friendly_repel_vector = Vector2()
+  var _flock_platform_repel_vector = Vector2()
 
   for _drone in _drones:
-    if _drone.team == _parent.team:
-      if _drone.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_COHESION_DISTANCE:
-        _flock_rotation_vector += Vector2(cos(_drone.rotation), sin(_drone.rotation))
-      if _drone.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_FRIENDLY_REPEL_DISTANCE:
-        _flock_friendly_repel_vector += (_parent.global_position - _drone.global_position).normalized()
-    else:
-      if chase_enemies:
-        if _drone.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_CHASE_DISTANCE:
-          _flock_chase_vector += (_drone.global_position - _parent.global_position).normalized()
+    if _drone != _parent:
+      if _drone.team == _parent.team:
+        if _drone.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_COHESION_DISTANCE:
+          _flock_rotation_vector += Vector2(cos(_drone.rotation), sin(_drone.rotation))
+        if _drone.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_FRIENDLY_REPEL_DISTANCE:
+          _flock_friendly_repel_vector += (_parent.global_position - _drone.global_position).normalized()
       else:
-        if _drone.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_ENEMY_REPEL_DISTANCE:
-          _flock_enemy_repel_vector += (_parent.global_position - _drone.global_position).normalized()
+        if chase_enemies:
+          if _drone.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_CHASE_DISTANCE:
+            _flock_chase_vector += (_drone.global_position - _parent.global_position).normalized()
+        else:
+          if _drone.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_ENEMY_REPEL_DISTANCE:
+            _flock_enemy_repel_vector += (_parent.global_position - _drone.global_position).normalized()
   _flock_rotation_vector = _flock_rotation_vector.normalized()
 
   _rotation_vector_target = (_target - _parent.global_position).normalized()
 
-  var _total_vector: Vector2 = (_flock_rotation_vector + _rotation_vector_target + (_flock_friendly_repel_vector * BOID_FRIENDLY_REPEL_SCALAR) + (_flock_enemy_repel_vector * BOID_ENEMY_REPEL_SCALAR) + (_flock_chase_vector * BOID_ENEMY_CHASE_SCALAR)).normalized()
+  for _platform in _platforms:
+    if _platform.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_PLATFORM_REPEL_DISTANCE:
+      _flock_platform_repel_vector += (_parent.global_position - _platform.global_position).normalized()
+
+  var _total_vector: Vector2 = (_flock_rotation_vector + _rotation_vector_target + (_flock_friendly_repel_vector * BOID_FRIENDLY_REPEL_SCALAR) + (_flock_enemy_repel_vector * BOID_ENEMY_REPEL_SCALAR) + (_flock_chase_vector * BOID_ENEMY_CHASE_SCALAR) + (_flock_platform_repel_vector * BOID_PLATFORM_REPEL_SCALAR)).normalized()
   var _rotation: float = _total_vector.angle()
 
   _parent.rotation = GDUtil.rotate_toward(_parent.rotation, _rotation, (_parent._data.speed / 50) * delta)

@@ -15,6 +15,7 @@ onready var _data: Dictionary = CastleDB.get_drone("laser")
 onready var _tree := get_tree()
 
 var _state: int
+var _stationary: bool
 var _target: Node2D
 
 func _on_died():
@@ -31,11 +32,15 @@ func _process(delta):
 
   match _state:
     COMBAT_DRONE_STATES.IDLE:
-      var _possible_targets = _tree.get_nodes_in_group("player")
+      var _possible_targets = _tree.get_nodes_in_group("attackable")
 
       for _possible_target in _possible_targets:
         if _possible_target.get_node("health").health > 0 && !_possible_target.is_queued_for_deletion():
           _set_target(_possible_target)
+
+      if _target == null && !_stationary:
+        _stationary = true
+        _boid.set_target(global_position)
 
     COMBAT_DRONE_STATES.MOVING:
       _boid.set_target(_target.global_position)
@@ -71,3 +76,4 @@ func _set_target(target: Node2D):
   _target = target
   _target.get_node("health").connect("died", self, "_on_target_died")
   _state = COMBAT_DRONE_STATES.MOVING
+  _stationary = false
