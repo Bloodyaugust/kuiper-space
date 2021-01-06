@@ -61,7 +61,7 @@ func _process(delta):
         _target = _tree.get_nodes_in_group("mothership")[0]
         _state = MINING_DRONE_STATES.MOVING
         _returning_cargo = true
-        _boid.set_target(_target.global_position)
+        _boid.set_target(_target.global_position, true)
 
     MINING_DRONE_STATES.MOVING:
       if _target == null || _target.is_queued_for_deletion():
@@ -98,11 +98,14 @@ func _process(delta):
 
     MINING_DRONE_STATES.UNLOADING:
       _job_completion += _data.workSpeed * delta
+      _beam.look_at(_target.global_position)
+      _beam.set_point_position(1, Vector2.RIGHT * global_position.distance_to(_target.global_position))
 
       if _job_completion >= 1:
         # TODO: Unload inventory to mothership
         _job_completion = 0
         _returning_cargo = false
+        _beam.set_point_position(1, Vector2())
         _state = MINING_DRONE_STATES.IDLE
 
   update()

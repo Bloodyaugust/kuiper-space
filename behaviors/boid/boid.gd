@@ -19,10 +19,12 @@ onready var _tree := get_tree()
 
 var _rotation_vector_target: Vector2
 var _target: Vector2
+var _target_soft: bool
 var _time_following_target: float
 
-func set_target(new_target: Vector2) -> void:
+func set_target(new_target: Vector2, soft: bool = false) -> void:
   _target = new_target
+  _target_soft = soft
   _time_following_target = 0
 
 func _process(delta):
@@ -34,7 +36,8 @@ func _process(delta):
   var _flock_friendly_repel_vector = Vector2()
   var _flock_platform_repel_vector = Vector2()
 
-  _time_following_target += delta
+  if !_target_soft:
+    _time_following_target += delta
 
   for _drone in _drones:
     if _drone != _parent:
@@ -52,7 +55,8 @@ func _process(delta):
             _flock_enemy_repel_vector += (_parent.global_position - _drone.global_position).normalized()
   _flock_rotation_vector = _flock_rotation_vector.normalized()
 
-  _rotation_vector_target = (_target - _parent.global_position).normalized() * lerp(1, BOID_TARGET_MAX_SCALAR, _time_following_target / BOID_TARGET_TIME_TO_MAX_SCALAR)
+  var _boid_target_scalar = lerp(1, BOID_TARGET_MAX_SCALAR, _time_following_target / BOID_TARGET_TIME_TO_MAX_SCALAR) if _flock_chase_vector.length_squared() < 0.1 && _flock_enemy_repel_vector.length_squared() < 0.1 else Vector2()
+  _rotation_vector_target = (_target - _parent.global_position).normalized() * _boid_target_scalar
 
   for _platform in _platforms:
     if _platform.global_position.distance_squared_to(_parent.global_position) < BOID_MAX_PLATFORM_REPEL_DISTANCE:

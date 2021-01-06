@@ -40,7 +40,7 @@ func _process(delta):
 
       if _target == null && !_stationary:
         _stationary = true
-        _boid.set_target(global_position)
+        _boid.set_target(global_position, true)
 
     COMBAT_DRONE_STATES.MOVING:
       _boid.set_target(_target.global_position)
