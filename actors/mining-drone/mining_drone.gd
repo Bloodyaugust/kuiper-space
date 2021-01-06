@@ -18,7 +18,7 @@ onready var _tree = get_tree()
 
 var _inventory: Dictionary = {
   "metals": 0,
-  "water": 0,
+  "volatiles": 0,
   "carbon": 0,
   "silicates": 0
 }
@@ -103,6 +103,16 @@ func _process(delta):
 
       if _job_completion >= 1:
         # TODO: Unload inventory to mothership
+        var _resources_to_store: Array = []
+
+        for _resource_key in _inventory.keys():
+          _resources_to_store.append({
+            "type": _resource_key,
+            "amount": _inventory[_resource_key]
+          })
+          _inventory[_resource_key] = 0
+
+        _target.store_resources(_resources_to_store)
         _job_completion = 0
         _returning_cargo = false
         _beam.set_point_position(1, Vector2())

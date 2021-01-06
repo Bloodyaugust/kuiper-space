@@ -42,7 +42,6 @@ func _fire(delta):
   look_at(_target.global_position)
 
   if _clip == 0:
-    print("reloading")
     _time_to_reload = _data.reload
     _state = WEAPON_STATES.RELOAD
     _beam.set_point_position(1, Vector2())
@@ -63,18 +62,15 @@ func _fire(delta):
         _delay = _data.delay
         _clip -= 1
         _beam.set_point_position(1, Vector2())
-        print("finish sustain")
 
       if _heat >= _data.heatCapacity:
         _state = WEAPON_STATES.COOLDOWN
-        print("cooling down")
         _beam.set_point_position(1, Vector2())
         _delay = 0
         _sustain = 0
 
     else:
       _sustain = _data.sustain
-      print("adding sustain")
 
 func _on_target_died():
   _clear_target()

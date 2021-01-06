@@ -35,7 +35,7 @@ func _process(delta):
       var _possible_targets = _tree.get_nodes_in_group("attackable")
 
       for _possible_target in _possible_targets:
-        if _possible_target.get_node("health").health > 0 && !_possible_target.is_queued_for_deletion():
+        if _possible_target.team != team && _possible_target.get_node("health").health > 0 && !_possible_target.is_queued_for_deletion():
           _set_target(_possible_target)
 
       if _target == null && !_stationary:

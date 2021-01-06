@@ -46,7 +46,7 @@
 				},
 				{
 					"type": "ice",
-					"resource": "water",
+					"resource": "volatiles",
 					"color": 8634102,
 					"resourceRange": [
 						10,
@@ -301,6 +301,96 @@
 				{
 					"typeStr": "6:weapons",
 					"name": "weapon",
+					"display": null
+				}
+			]
+		},
+		{
+			"name": "ships",
+			"columns": [
+				{
+					"typeStr": "0",
+					"name": "type",
+					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "health",
+					"display": null
+				},
+				{
+					"typeStr": "4",
+					"name": "speed",
+					"display": null
+				},
+				{
+					"typeStr": "8",
+					"name": "weapons",
+					"display": null
+				},
+				{
+					"typeStr": "2",
+					"name": "tacticalMove",
+					"display": null
+				}
+			],
+			"lines": [
+				{
+					"type": "mothership",
+					"health": 50,
+					"speed": 35,
+					"weapons": [
+						{
+							"weapon": "laser",
+							"position": [
+								25,
+								20
+							]
+						},
+						{
+							"weapon": "laser",
+							"position": [
+								25,
+								80
+							]
+						},
+						{
+							"weapon": "laser",
+							"position": [
+								230,
+								20
+							]
+						},
+						{
+							"weapon": "laser",
+							"position": [
+								230,
+								80
+							]
+						}
+					],
+					"tacticalMove": false
+				}
+			],
+			"separators": [],
+			"props": {}
+		},
+		{
+			"name": "ships@weapons",
+			"props": {
+				"hide": true
+			},
+			"separators": [],
+			"lines": [],
+			"columns": [
+				{
+					"typeStr": "6:weapons",
+					"name": "weapon",
+					"display": null
+				},
+				{
+					"typeStr": "16",
+					"name": "position",
 					"display": null
 				}
 			]

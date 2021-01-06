@@ -27,6 +27,15 @@ func get_entries(sheet_name: String) -> Array:
 
   return []
 
+func get_entry(sheet_name: String, type: String) -> Dictionary:
+  for sheet in db.sheets:
+    if sheet_name == sheet.name:
+      for entry in sheet.lines:
+        if entry.type == type:
+          return entry
+
+  return {}
+
 func get_platform(type: String) -> Dictionary:
   var platforms: Array = get_entries("platforms")
 

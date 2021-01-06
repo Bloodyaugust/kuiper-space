@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://actors/ships/mothership/mothership.png" type="Texture" id=1]
+[ext_resource path="res://actors/ships/mothership/mothership.gd" type="Script" id=2]
+[ext_resource path="res://behaviors/health/Health.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/weapons/Weapon.tscn" type="PackedScene" id=4]
+
+[node name="Mothership" type="Sprite" groups=[
+"mothership",
+"ships",
+]]
+position = Vector2( -5.61914, 193.801 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+health_scene = ExtResource( 3 )
+weapon_scene = ExtResource( 4 )
