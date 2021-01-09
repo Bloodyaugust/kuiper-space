@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://actors/mining-drone/mining_drone.gd" type="Script" id=1]
 [ext_resource path="res://actors/mining-drone/mining_drone.png" type="Texture" id=2]
 [ext_resource path="res://behaviors/health/Health.tscn" type="PackedScene" id=3]
 [ext_resource path="res://behaviors/boid/Boid.tscn" type="PackedScene" id=4]
+[ext_resource path="res://behaviors/selectable/Selectable.tscn" type="PackedScene" id=5]
 
 [node name="MiningDrone" type="Sprite" groups=[
 "drones",
@@ -19,3 +20,5 @@ health_scene = ExtResource( 3 )
 points = PoolVector2Array( 0, 0, 0, 0 )
 width = 2.0
 default_color = Color( 0.486275, 0.0823529, 0.541176, 1 )
+
+[node name="Selectable" parent="." instance=ExtResource( 5 )]

@@ -8,7 +8,7 @@ var state: Dictionary = {
   "achievements_synced": false,
   "client_view": "",
   "game": "",
-  "score": 0
+  "selection": []
  }
 
 func set_state(state_key: String, new_state) -> void:
@@ -20,6 +20,7 @@ func _initialize():
   set_state("achievements_synced", false)
   set_state("client_view", ClientConstants.CLIENT_VIEW_MAIN_MENU)
   set_state("game", GameConstants.GAME_OVER)
+  set_state("selection", [])
 
 func _ready():
   call_deferred("_initialize")

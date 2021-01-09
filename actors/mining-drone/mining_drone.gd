@@ -67,8 +67,8 @@ func _process(delta):
       if _target == null:
         _target = _tree.get_nodes_in_group("mothership")[0]
         _state = MINING_DRONE_STATES.MOVING
-        _returning_cargo = _has_cargo()
-        _boid.set_target(_target.global_position, !_returning_cargo)
+        _returning_cargo = true
+        _boid.set_target(_target.global_position, !_has_cargo())
 
     MINING_DRONE_STATES.MOVING:
       if _target == null || _target.is_queued_for_deletion():

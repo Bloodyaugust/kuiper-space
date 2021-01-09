@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://actors/ships/mothership/Mothership.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/mining-drone/MiningDrone.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://actors/platform/Platform.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scripts/controllers/MinimapRenderer.gd" type="Script" id=10]
 [ext_resource path="res://views/resources.gd" type="Script" id=11]
+[ext_resource path="res://views/selection.gd" type="Script" id=12]
+[ext_resource path="res://scripts/controllers/SelectionController.gd" type="Script" id=13]
 
 [node name="game" type="Node2D"]
 
@@ -132,6 +134,18 @@ gui_disable_input = true
 [node name="MinimapRenderer" type="Node2D" parent="CanvasLayer/MinimapContainer/PanelContainer/ViewportContainer/Viewport"]
 script = ExtResource( 10 )
 
+[node name="SelectionContainer" type="PanelContainer" parent="CanvasLayer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -150.0
+margin_right = 824.0
+grow_vertical = 0
+rect_min_size = Vector2( 824, 150 )
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="RTS-Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 1.3, 1.3 )
@@ -142,7 +156,6 @@ zoom_min = 1.0
 
 [node name="MiningDrone" parent="." instance=ExtResource( 2 )]
 position = Vector2( 36.0103, 131.265 )
-asteroid_type_target = "metallic"
 
 [node name="MiningDrone2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 76.5969, 128.433 )
@@ -218,3 +231,6 @@ position = Vector2( -928.213, -536.832 )
 
 [node name="Platform" parent="." instance=ExtResource( 9 )]
 position = Vector2( -87.563, -49.0782 )
+
+[node name="SelectionController" type="Node2D" parent="."]
+script = ExtResource( 13 )
