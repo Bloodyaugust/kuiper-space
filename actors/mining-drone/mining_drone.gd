@@ -113,11 +113,12 @@ func _process(delta):
         var _resources_to_store: Array = []
 
         for _resource_key in _inventory.keys():
-          _resources_to_store.append({
-            "type": _resource_key,
-            "amount": _inventory[_resource_key]
-          })
-          _inventory[_resource_key] = 0
+          if _inventory[_resource_key] > 0:
+            _resources_to_store.append({
+              "type": _resource_key,
+              "amount": _inventory[_resource_key]
+            })
+            _inventory[_resource_key] = 0
 
         _target.store_resources(_resources_to_store)
         _job_completion = 0

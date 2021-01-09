@@ -17,13 +17,13 @@ func spend_resources(spend_objects: Array) -> void:
   for _spend_data in spend_objects:
     _inventory[_spend_data.type] -= _spend_data.amount
   
-  _update_store_resources()
+  _update_store_resources(spend_objects)
 
 func store_resources(resource_objects: Array) -> void:
   for _resource_data in resource_objects:
     _inventory[_resource_data.type] += _resource_data.amount
 
-  _update_store_resources()
+  _update_store_resources(resource_objects)
 
 func _on_died():
   queue_free()
@@ -50,6 +50,12 @@ func _ready():
 
   call_deferred("_update_store_resources")
 
-func _update_store_resources():
+func _update_store_resources(resources: Array = []):
+  if resources.size():
+    for resource in resources:
+      Store.set_state(resource.type, _inventory[resource.type])
+    
+    return
+
   for _key in _inventory.keys():
     Store.set_state(_key, _inventory[_key])
