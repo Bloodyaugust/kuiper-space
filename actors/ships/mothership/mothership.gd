@@ -48,6 +48,8 @@ func _ready():
 
     _new_weapon.translate(Vector2(_weapon.position[0] - (_ship_rect.size.x / 2), _weapon.position[1] - (_ship_rect.size.y / 2)))
 
+  call_deferred("_update_store_resources")
+
 func _update_store_resources():
   for _key in _inventory.keys():
     Store.set_state(_key, _inventory[_key])

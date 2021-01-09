@@ -33,6 +33,13 @@ func _draw():
   # draw_arc(Vector2(), sqrt(500), 0, PI * 2, 12, Color.blue)
   # draw_arc(Vector2(), sqrt(10000), 0, PI * 2, 12, Color.green)
 
+func _has_cargo() -> bool:
+  for _resource_key in _inventory.keys():
+    if _inventory[_resource_key] > 0:
+      return true
+
+  return false
+
 func _on_asteroid_mined_out():
   _target = null
   _state = MINING_DRONE_STATES.IDLE
@@ -60,8 +67,8 @@ func _process(delta):
       if _target == null:
         _target = _tree.get_nodes_in_group("mothership")[0]
         _state = MINING_DRONE_STATES.MOVING
-        _returning_cargo = true
-        _boid.set_target(_target.global_position, true)
+        _returning_cargo = _has_cargo()
+        _boid.set_target(_target.global_position, !_returning_cargo)
 
     MINING_DRONE_STATES.MOVING:
       if _target == null || _target.is_queued_for_deletion():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://actors/ships/mothership/Mothership.tscn" type="PackedScene" id=1]
 [ext_resource path="res://actors/mining-drone/MiningDrone.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://resources/themes/kenney/kenney.tres" type="Theme" id=6]
 [ext_resource path="res://views/fps.gd" type="Script" id=7]
 [ext_resource path="res://addons/carmel4a97.RTS_Camera2D/RTS-Camera2D.gd" type="Script" id=8]
+[ext_resource path="res://actors/platform/Platform.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scripts/controllers/MinimapRenderer.gd" type="Script" id=10]
 [ext_resource path="res://views/resources.gd" type="Script" id=11]
 
@@ -214,3 +215,6 @@ position = Vector2( -955.585, -526.45 )
 
 [node name="CombatDrone4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -928.213, -536.832 )
+
+[node name="Platform" parent="." instance=ExtResource( 9 )]
+position = Vector2( -87.563, -49.0782 )
