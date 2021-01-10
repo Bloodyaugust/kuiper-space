@@ -120,7 +120,7 @@
 					"type": "mining",
 					"speed": 150,
 					"health": 5,
-					"workSpeed": 0.15,
+					"workSpeed": 0.3,
 					"range": 5000,
 					"weapons": []
 				},

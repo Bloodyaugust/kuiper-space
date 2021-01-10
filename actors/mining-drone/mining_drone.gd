@@ -2,10 +2,11 @@ extends Sprite
 
 enum MINING_DRONE_STATES {
   IDLE,
-  MOVING,
   MINING,
   UNLOADING
 }
+
+const CARGO_SPACE: int = 2
 
 export var asteroid_type_target: String
 export var health_scene: PackedScene
@@ -23,9 +24,19 @@ var _inventory: Dictionary = {
   "silicates": 0
 }
 var _job_completion: float
-var _returning_cargo: bool
+var _mothership: Sprite
 var _state: int = MINING_DRONE_STATES.IDLE
 var _target: Node2D
+var _user_specified_target: bool
+
+func target_asteroid(asteroid: Sprite, user_specified: bool) -> void:
+  _target = asteroid
+  _user_specified_target = user_specified
+
+  if user_specified:
+    asteroid_type_target = asteroid._data.type
+
+  _set_state(MINING_DRONE_STATES.MINING)
 
 func _draw():
   pass
@@ -40,52 +51,45 @@ func _has_cargo() -> bool:
 
   return false
 
+func _has_cargo_space() -> bool:
+  var _cargo: int = 0
+
+  for _resource_key in _inventory.keys():
+    _cargo += _inventory[_resource_key]
+
+  return _cargo < CARGO_SPACE
+
 func _on_asteroid_mined_out():
   _target = null
-  _state = MINING_DRONE_STATES.IDLE
-  _job_completion = 0
-  _beam.set_point_position(1, Vector2())
+  _user_specified_target = false
+  
+  if _state != MINING_DRONE_STATES.IDLE:
+    _set_state(MINING_DRONE_STATES.IDLE)
 
 func _on_died():
   queue_free()
 
 func _process(delta):
+  if _target == null || _target.is_queued_for_deletion():
+    _on_asteroid_mined_out()
+
   match _state:
     MINING_DRONE_STATES.IDLE:
-      # TODO: cache this
-      var _asteroids = _tree.get_nodes_in_group("asteroids")
+      if _has_cargo_space():
+        # TODO: cache this
+        var _asteroids = _tree.get_nodes_in_group("asteroids")
 
-      for _asteroid in _asteroids:
-        if _asteroid.get_type() == asteroid_type_target:
-          _target = _asteroid
-          _state = MINING_DRONE_STATES.MOVING
-          _returning_cargo = false
+        for _asteroid in _asteroids:
+          if _asteroid.get_type() == asteroid_type_target:
+            _target = _asteroid
+            _set_state(MINING_DRONE_STATES.MINING)
+            break
 
-          _boid.set_target(_target.global_position)
-          break
-
-      if _target == null:
-        _target = _tree.get_nodes_in_group("mothership")[0]
-        _state = MINING_DRONE_STATES.MOVING
-        _returning_cargo = true
-        _boid.set_target(_target.global_position, !_has_cargo())
-
-    MINING_DRONE_STATES.MOVING:
-      if _target == null || _target.is_queued_for_deletion():
-        _on_asteroid_mined_out()
-        continue
-
-      if position.distance_squared_to(_target.position) <= _data.range:
-        if _returning_cargo:
-          _state = MINING_DRONE_STATES.UNLOADING
-        else:
-          _state = MINING_DRONE_STATES.MINING
+      if _target == null && _has_cargo():
+        _set_state(MINING_DRONE_STATES.UNLOADING)
     
     MINING_DRONE_STATES.MINING:
-      if _target == null || _target.is_queued_for_deletion():
-        _on_asteroid_mined_out()
-        continue
-      else:
+      if global_position.distance_squared_to(_target.global_position) <= _data.range:
         _job_completion += _data.workSpeed * delta
         _beam.look_at(_target.global_position)
         _beam.set_point_position(1, Vector2.RIGHT * global_position.distance_to(_target.global_position))
@@ -94,37 +98,27 @@ func _process(delta):
           var _resource_object = _target.mine()
 
           _inventory[_resource_object.type] += _resource_object.amount
-          _job_completion = 0
-          _state = MINING_DRONE_STATES.MOVING
-          # TODO: Cache this
-          _target = _tree.get_nodes_in_group("mothership")[0]
-          _returning_cargo = true
-          _beam.set_point_position(1, Vector2())
 
-          _boid.set_target(_target.global_position)
+          if _has_cargo_space():
+            _set_state(MINING_DRONE_STATES.MINING)
+          else:
+            _set_state(MINING_DRONE_STATES.UNLOADING)
+      else:
+        _beam.set_point_position(1, Vector2())
 
     MINING_DRONE_STATES.UNLOADING:
-      _job_completion += _data.workSpeed * delta
-      _beam.look_at(_target.global_position)
-      _beam.set_point_position(1, Vector2.RIGHT * global_position.distance_to(_target.global_position))
+      if global_position.distance_squared_to(_mothership.global_position) <= _data.range:
+        _job_completion += _data.workSpeed * delta
+        _beam.look_at(_mothership.global_position)
+        _beam.set_point_position(1, Vector2.RIGHT * global_position.distance_to(_mothership.global_position))
+      else:
+        _beam.set_point_position(1, Vector2())
 
       if _job_completion >= 1:
-        # TODO: Unload inventory to mothership
-        var _resources_to_store: Array = []
-
-        for _resource_key in _inventory.keys():
-          if _inventory[_resource_key] > 0:
-            _resources_to_store.append({
-              "type": _resource_key,
-              "amount": _inventory[_resource_key]
-            })
-            _inventory[_resource_key] = 0
-
-        _target.store_resources(_resources_to_store)
-        _job_completion = 0
-        _returning_cargo = false
-        _beam.set_point_position(1, Vector2())
-        _state = MINING_DRONE_STATES.IDLE
+        if _user_specified_target:
+          _set_state(MINING_DRONE_STATES.MINING)
+        else:
+          _set_state(MINING_DRONE_STATES.IDLE)
 
   update()
 
@@ -136,3 +130,35 @@ func _ready():
   _new_health_behavior.connect("died", self, "_on_died")
 
   add_child(_new_health_behavior)
+
+  _mothership = _tree.get_nodes_in_group("mothership")[0]
+
+func _set_state(new_state: int) -> void:
+  _job_completion = 0
+  _beam.set_point_position(1, Vector2())
+
+  match _state:
+    MINING_DRONE_STATES.UNLOADING:
+      var _resources_to_store: Array = []
+
+      for _resource_key in _inventory.keys():
+        if _inventory[_resource_key] > 0:
+          _resources_to_store.append({
+            "type": _resource_key,
+            "amount": _inventory[_resource_key]
+          })
+          _inventory[_resource_key] = 0
+
+      _mothership.store_resources(_resources_to_store)
+
+  match new_state:
+    MINING_DRONE_STATES.IDLE:
+      _boid.set_target(_mothership.global_position)
+
+    MINING_DRONE_STATES.MINING:
+      _boid.set_target(_target.global_position)
+
+    MINING_DRONE_STATES.UNLOADING:
+      _boid.set_target(_mothership.global_position)
+
+  _state = new_state
