@@ -270,6 +270,102 @@ position = Vector2( -955.585, -526.45 )
 [node name="CombatDrone4" parent="." instance=ExtResource( 3 )]
 position = Vector2( -928.213, -536.832 )
 
+[node name="CombatDrone5" parent="." instance=ExtResource( 3 )]
+position = Vector2( -870.636, -514.18 )
+
+[node name="CombatDrone6" parent="." instance=ExtResource( 3 )]
+position = Vector2( -898.953, -500.965 )
+
+[node name="CombatDrone7" parent="." instance=ExtResource( 3 )]
+position = Vector2( -897.065, -535.889 )
+
+[node name="CombatDrone8" parent="." instance=ExtResource( 3 )]
+position = Vector2( -869.693, -546.271 )
+
+[node name="CombatDrone9" parent="." instance=ExtResource( 3 )]
+position = Vector2( -904.615, -442.445 )
+
+[node name="CombatDrone10" parent="." instance=ExtResource( 3 )]
+position = Vector2( -932.932, -429.23 )
+
+[node name="CombatDrone11" parent="." instance=ExtResource( 3 )]
+position = Vector2( -931.044, -464.154 )
+
+[node name="CombatDrone12" parent="." instance=ExtResource( 3 )]
+position = Vector2( -903.672, -474.536 )
+
+[node name="CombatDrone13" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1015.99, -416.017 )
+
+[node name="CombatDrone14" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1044.31, -402.802 )
+
+[node name="CombatDrone15" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1042.42, -437.726 )
+
+[node name="CombatDrone16" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1015.05, -448.108 )
+
+[node name="CombatDrone17" parent="." instance=ExtResource( 3 )]
+position = Vector2( -957.472, -425.456 )
+
+[node name="CombatDrone18" parent="." instance=ExtResource( 3 )]
+position = Vector2( -985.789, -412.24 )
+
+[node name="CombatDrone19" parent="." instance=ExtResource( 3 )]
+position = Vector2( -983.901, -447.165 )
+
+[node name="CombatDrone20" parent="." instance=ExtResource( 3 )]
+position = Vector2( -956.529, -457.547 )
+
+[node name="CombatDrone21" parent="." instance=ExtResource( 3 )]
+position = Vector2( -991.452, -353.721 )
+
+[node name="CombatDrone22" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1019.77, -340.506 )
+
+[node name="CombatDrone23" parent="." instance=ExtResource( 3 )]
+position = Vector2( -1017.88, -375.43 )
+
+[node name="CombatDrone24" parent="." instance=ExtResource( 3 )]
+position = Vector2( -990.509, -385.812 )
+
+[node name="CombatDrone25" parent="." instance=ExtResource( 3 )]
+position = Vector2( -931.044, -366.935 )
+
+[node name="CombatDrone26" parent="." instance=ExtResource( 3 )]
+position = Vector2( -959.361, -353.72 )
+
+[node name="CombatDrone27" parent="." instance=ExtResource( 3 )]
+position = Vector2( -957.473, -388.644 )
+
+[node name="CombatDrone28" parent="." instance=ExtResource( 3 )]
+position = Vector2( -930.101, -399.026 )
+
+[node name="CombatDrone29" parent="." instance=ExtResource( 3 )]
+position = Vector2( -872.524, -376.374 )
+
+[node name="CombatDrone30" parent="." instance=ExtResource( 3 )]
+position = Vector2( -900.84, -363.159 )
+
+[node name="CombatDrone31" parent="." instance=ExtResource( 3 )]
+position = Vector2( -898.953, -398.083 )
+
+[node name="CombatDrone32" parent="." instance=ExtResource( 3 )]
+position = Vector2( -871.58, -408.465 )
+
+[node name="CombatDrone33" parent="." instance=ExtResource( 3 )]
+position = Vector2( -906.503, -304.64 )
+
+[node name="CombatDrone34" parent="." instance=ExtResource( 3 )]
+position = Vector2( -934.82, -291.425 )
+
+[node name="CombatDrone35" parent="." instance=ExtResource( 3 )]
+position = Vector2( -932.932, -326.349 )
+
+[node name="CombatDrone36" parent="." instance=ExtResource( 3 )]
+position = Vector2( -905.56, -336.731 )
+
 [node name="Platform" parent="." instance=ExtResource( 9 )]
 position = Vector2( -87.563, -49.0782 )
 

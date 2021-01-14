@@ -46,4 +46,4 @@ func _scale_asteroid() -> void:
   var _new_scale: float = 0.25 + (_resource_count / _data.resourceRange[1]) * 0.75
   scale = Vector2(_new_scale, _new_scale)
 
-  _area2d.get_child(0).shape.radius = get_rect().size.length() / 2
+  _area2d.get_child(0).shape.radius = (get_rect().size.length() * 0.75) / 2

@@ -1,5 +1,7 @@
 extends Sprite
 
+signal died
+
 enum MINING_DRONE_STATES {
   IDLE,
   MINING,
@@ -16,6 +18,8 @@ onready var _beam: Line2D = $"./Beam"
 onready var _boid = $"./Boid"
 onready var _data: Dictionary = CastleDB.get_drone("mining")
 onready var _tree = get_tree()
+
+var health: Node
 
 var _inventory: Dictionary = {
   "metals": 0,
@@ -63,10 +67,11 @@ func _on_asteroid_mined_out():
   _target = null
   _user_specified_target = false
   
-  if _state != MINING_DRONE_STATES.IDLE:
+  if _state != MINING_DRONE_STATES.IDLE && _state != MINING_DRONE_STATES.UNLOADING:
     _set_state(MINING_DRONE_STATES.IDLE)
 
 func _on_died():
+  emit_signal("died")
   queue_free()
 
 func _process(delta):
@@ -128,6 +133,8 @@ func _ready():
   _new_health_behavior.name = "health"
   _new_health_behavior.health = _data.health
   _new_health_behavior.connect("died", self, "_on_died")
+
+  health = _new_health_behavior
 
   add_child(_new_health_behavior)
 
