@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/mothership.png-5405ff7ee20875d0df1558e2a64c853e.stex"
+path="res://.import/mothership_palette_tool_grey.png-ffa12a59cc9df7174497a31b67fd3378.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://actors/ships/mothership/mothership.png"
-dest_files=[ "res://.import/mothership.png-5405ff7ee20875d0df1558e2a64c853e.stex" ]
+source_file="res://actors/ships/mothership/mothership_palette_tool_grey.png"
+dest_files=[ "res://.import/mothership_palette_tool_grey.png-ffa12a59cc9df7174497a31b67fd3378.stex" ]
 
 [params]
 
