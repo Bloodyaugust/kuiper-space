@@ -11,7 +11,7 @@ void fragment(){
 	float y = increment*palette_index + increment * 0.5;
 	vec4 color = texture(TEXTURE, UV);
 	vec4 new_color = texture(palette, vec2(color.r, y));
-	float a = step(0.00392, color.a);
+	float a = step(0.14285, color.a);
 	new_color.a *= a;
     
 	COLOR = new_color;

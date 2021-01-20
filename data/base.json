@@ -28,8 +28,7 @@
 				},
 				{
 					"typeStr": "4",
-					"name": "frequency",
-					"display": null
+					"name": "weight"
 				}
 			],
 			"lines": [
@@ -41,8 +40,8 @@
 						20
 					],
 					"color": 13522696,
-					"frequency": 3,
-					"colorHex": "#ce5708"
+					"colorHex": "#ce5708",
+					"weight": 10
 				},
 				{
 					"type": "ice",
@@ -52,8 +51,8 @@
 						10,
 						100
 					],
-					"frequency": 5,
-					"colorHex": "#83bef6"
+					"colorHex": "#83bef6",
+					"weight": 15
 				},
 				{
 					"type": "carbonaceous",
@@ -63,8 +62,8 @@
 						15,
 						25
 					],
-					"frequency": 15,
-					"colorHex": "#615a5a"
+					"colorHex": "#615a5a",
+					"weight": 50
 				},
 				{
 					"type": "silicate",
@@ -74,8 +73,8 @@
 						30,
 						50
 					],
-					"frequency": 10,
-					"colorHex": "#ccbdbd"
+					"colorHex": "#ccbdbd",
+					"weight": 25
 				}
 			],
 			"separators": [],
