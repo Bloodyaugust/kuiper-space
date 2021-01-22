@@ -108,6 +108,10 @@ func _process(delta):
         _clip = _data.clip
         _clear_target()
         
+func _ready():
+  if _data.beam:
+    _beam.default_color = GameConstants.TEAM_COLORS[_parent.team]
+
 func _set_target(new_target: Node2D) -> void:
   if _target != null:
     _target.get_node("health").disconnect("died", self, "_on_target_died")
