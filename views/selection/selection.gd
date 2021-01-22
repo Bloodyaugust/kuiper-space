@@ -8,6 +8,8 @@ enum SELECTION_VIEWS {
 
 export var selected_actor_scene: PackedScene
 
+onready var _mothership_container: MarginContainer = find_node("Mothership")
+onready var _mothership_health: ColorRect = find_node("MothershipHealth")
 onready var _selected_actors_container: GridContainer = find_node("SelectedActors")
 onready var _units_container: MarginContainer = find_node("Units")
 
@@ -20,6 +22,7 @@ func _hide():
 
   _current_subview = SELECTION_VIEWS.NONE
 
+  _mothership_container.visible = false
   _units_container.visible = false
 
 func _on_state_changed(state_key, substate):
@@ -30,6 +33,10 @@ func _on_state_changed(state_key, substate):
       else:
         _show()
 
+func _process(delta):
+  if _current_subview == SELECTION_VIEWS.MOTHERSHIP:
+    _mothership_health.rect_size.x = (Store.state.selection[0].health.health / Store.state.selection[0]._data.health) * 280
+
 func _ready():
   Store.connect("state_changed", self, "_on_state_changed")
 
@@ -37,6 +44,7 @@ func _show():
   rect_position.y = 450
   _visible = true
 
+  _mothership_container.visible = false
   _units_container.visible = false
 
   if Store.state.selection.size() == 1 && Store.state.selection[0]._data.type == "mothership":
@@ -55,3 +63,6 @@ func _show():
 
         _new_selected_actor_component.selectable = _selectable
         _selected_actors_container.add_child(_new_selected_actor_component)
+
+    SELECTION_VIEWS.MOTHERSHIP:
+      _mothership_container.visible = true
