@@ -150,7 +150,7 @@ __meta__ = {
 }
 selected_actor_scene = ExtResource( 14 )
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SelectionContainer"]
+[node name="Units" type="MarginContainer" parent="CanvasLayer/SelectionContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 817.0
@@ -160,14 +160,14 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/SelectionContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/SelectionContainer/Units"]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 790.0
 margin_bottom = 116.0
 custom_constants/separation = 20
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SelectionContainer/MarginContainer/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/SelectionContainer/Units/HBoxContainer"]
 margin_right = 465.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 465, 96 )
@@ -176,7 +176,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SelectedActors" type="GridContainer" parent="CanvasLayer/SelectionContainer/MarginContainer/HBoxContainer/ColorRect"]
+[node name="SelectedActors" type="GridContainer" parent="CanvasLayer/SelectionContainer/Units/HBoxContainer/ColorRect"]
 margin_left = 10.0
 margin_right = 445.0
 margin_bottom = 96.0

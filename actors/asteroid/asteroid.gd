@@ -31,7 +31,8 @@ func mine() -> Dictionary:
 func _on_area_input_event(viewport: Object, event: InputEvent, shape_index: int):
   if event is InputEventMouseButton && event.button_index == BUTTON_RIGHT && !event.pressed && Store.state.selection.size() > 0:
     for _drone in Store.state.selection:
-      _drone.target_asteroid(self, true)
+      if _drone._data.type == "mining":
+        _drone.target_asteroid(self, true)
 
 func _process(delta):
   rotate(_rotation_speed * delta)

@@ -1,10 +1,14 @@
 extends Sprite
 
+signal died
+
 export var health_scene: PackedScene
 export var team: int
 export var weapon_scene: PackedScene
 
 onready var _data: Dictionary = CastleDB.get_entry("ships", "mothership")
+
+var health: Node
 
 var _inventory: Dictionary = {
   "metals": 0,
@@ -26,6 +30,7 @@ func store_resources(resource_objects: Array) -> void:
   _update_store_resources(resource_objects)
 
 func _on_died():
+  emit_signal("died")
   queue_free()
 
 func _ready():
@@ -36,6 +41,7 @@ func _ready():
   _new_health_behavior.health = _data.health
   _new_health_behavior.connect("died", self, "_on_died")
 
+  health = _new_health_behavior
   add_child(_new_health_behavior)
 
   for _weapon in _data.weapons:
